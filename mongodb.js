@@ -12,7 +12,7 @@ const id = new ObjectID();
 console.log(id)
 console.log(id.getTimestamp())  // will return the date and time to milisec when the ObjectID was created
 console.log(id.id.length)
-console.log(id.toHexString())
+console.log(id.toHexString()) 
 console.log(id.toHexString().length)
 
 const connectionURL = "mongodb://127.0.0.1:27017";

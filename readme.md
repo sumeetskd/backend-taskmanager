@@ -53,4 +53,10 @@ O/P:
 24
 ```
 
+### Find and FindOne
 
+find(query, options)-> returns a {Cursor}
+
+Creates a cursor for a query that can be used to iterate over results from MongoDB
+
+https://mongodb.github.io/node-mongodb-native/3.7/api/Collection.html#find

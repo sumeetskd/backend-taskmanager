@@ -1,7 +1,9 @@
 //crud operation
 
-const mongodb = require("mongodb");
-const MongoClient = mongodb.MongoClient;
+// const mongodb = require("mongodb");
+// const MongoClient = mongodb.MongoClient;
+
+const { MongoClient, ObjectID } = require("mongodb");
 
 const connectionURL = "mongodb://127.0.0.1:27017";
 const databaseName = "task-manager";
@@ -16,32 +18,21 @@ MongoClient.connect(
     console.log("Connected Correctly");
 
     const db = client.db(databaseName);
-    // db.collection('users').insertOne({
-    //     name: 'Amit',
-    //     age: 22
-    // }, (error, res)=>{
-    //     if(error)
-    //         return console.log("undable to insert")
-    //     return console.log(res.ops)
-    // })
-
-    db.collection("tasks").insertMany(
-      [
-        {
-          description: "Mongo-InsertOne1",
-          completed: false,
-        },
-        {
-          description: "Mongo-InsertMany2",
-          completed: false,
-        },
-      ],
-      (err, res) => {
-        if(err){
-            return console.log("Error:", err);
-        }
-        return console.log(res.ops)
+    
+    const updatePromise = db.collection('users').updateOne({
+      _id: new ObjectID("64eb68af1a7f336428940957")
+    }, {
+      $set: {
+        name: "Ashutosh",
+        age: "25"
       }
-    );
+    })
+    //This will return a promise, so we shall handle it using then and catch
+    updatePromise.then((result)=>{
+      console.log(result)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
   }
 );

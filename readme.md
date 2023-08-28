@@ -14,3 +14,10 @@ res.ops - > will print the result in document format as it is stored in the coll
 ### for insert
 - its an async function
 - a Promise is returned if no callback is passed
+
+
+### for update
+Some of the operators we can use with update are-
+- $set
+- $unset
+- $rename

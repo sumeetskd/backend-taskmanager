@@ -19,22 +19,40 @@ MongoClient.connect(
 
     const db = client.db(databaseName);
     //This will return a promise, so we shall handle it using then and catch
-    db.collection("users")
-      .updateOne(
+    // db.collection("users")
+    //   .updateOne(
+    //     {
+    //       _id: new ObjectID("64eb2e2b0614841ec0b02e8b"),
+    //     },
+    //     {
+    //       $inc: {
+    //         age: 1,
+    //       },
+    //     }
+    //   )
+    //   .then((result) => {
+    //     console.log("Updated Successfully", result);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    db.collection("tasks")
+      .updateMany(
         {
-          _id: new ObjectID("64eb2e2b0614841ec0b02e8b"),
+          completed: false,
         },
         {
-          $inc: {
-            age: 1,
+          $set: {
+            completed: true,
           },
         }
       )
-      .then((result) => {
-        console.log("Updated Successfully", result);
+      .then(data=>{
+        console.log(data.modifiedCount);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(error=>{
+        console.log(error)
+      })
   }
 );

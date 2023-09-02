@@ -28,14 +28,15 @@ MongoClient.connect(
     //   .catch((err) => {
     //     console.log(err);
     //   });
-    db.collection("tasks").deleteOne({
-      description: "Mongo-InsertMany"
-    })
-    .then(res=>{
-      console.log(res)
-    })
-    .catch(error=>{
-      console.log(error)
-    })
+    // db.collection("tasks")
+    //   .deleteOne({
+    //     description: "Mongo-InsertMany",
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   }
 );

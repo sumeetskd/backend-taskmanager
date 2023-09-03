@@ -50,7 +50,7 @@ app.get("/users/:id", (req, res) => {
 
 })
 
-app.post("/task", (req, res) => {
+app.post("/tasks", (req, res) => {
   const task = new Task(req.body);
   task
     .save()
@@ -62,6 +62,27 @@ app.post("/task", (req, res) => {
       console.log(err);
     });
 });
+
+app.get("/tasks", (req, res)=>{
+    Task.find({})
+    .then((task)=>{
+        res.send(task)
+    })
+    .catch(e=>{
+        res.status(500).send()
+    })
+})
+
+app.get("/tasks/:id", (req, res)=>{
+    console.log(req.params)
+    Task.findById(req.params.id)
+    .then((task)=>{
+        res.send(task)
+    })
+    .catch(e=>{
+        res.status(500).send()
+    })
+})
 
 app.listen(port, () => {
   console.log("Server is up on port", port);

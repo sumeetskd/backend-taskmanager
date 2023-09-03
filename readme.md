@@ -21,3 +21,15 @@ Some of the operators we can use with update are-
 - $set
 - $unset
 - $rename
+
+
+
+
+
+
+## Express
+```
+app.use(express.json())
+// going to automatically parse incoming JSON to an object, if not included, while accessing req.body will throw undefined message on console.
+
+```

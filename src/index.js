@@ -16,10 +16,9 @@ app.post('/users',(req, res)=>{
         res.send(user)
     })
     .catch(err=>{
-        // res.status(400)
         res.status(400).send(err)   //we can chain the methods together
     })
-    // res.send('testing!')
+
 })
 
 app.listen(port, ()=>{

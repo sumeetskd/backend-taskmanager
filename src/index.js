@@ -50,6 +50,27 @@ app.get("/users/:id", async (req, res) => {
   
 });
 
+app.patch("/users/:id", async (req, res)=>{
+  //setting up the validation for the property you want to validate
+  const updates = Object.keys(req.body) //will convert the Object Keys to Array of Strings
+  const allowedUpdate = ['name', 'email', 'password', 'age']
+  const isValidOperation = updates.every((update)=>allowedUpdate.includes(update))//every will check if the callback is returning true for every iteration within the array. if one if the value is false it will return false
+
+  if(!isValidOperation){
+    return res.status(400).send({error: "Invalid updates!"})
+  }
+  try{
+    const userPatch = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+    if(!userPatch){
+      return res.status(404).send()
+    }
+    res.send(userPatch)
+  }catch(err){
+    console.log("Inside Error");
+    res.status(500).send(err);
+  }
+})
+
 app.post("/tasks", async (req, res) => {
   const task = new Task(req.body);
   try{

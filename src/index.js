@@ -72,6 +72,19 @@ app.patch("/users/:id", async (req, res)=>{
   }
 })
 
+app.delete("/users/:id", async (req, res)=>{
+  try{
+    const user = await User.findByIdAndDelete(req.params.id)
+    if(!user){
+      res.status(404).send("User Not Found!")
+    }
+    res.send(user)
+  }
+  catch(e){
+    res.status(500).send(e)
+  }
+})
+
 app.post("/tasks", async (req, res) => {
   const task = new Task(req.body);
   try{
@@ -128,6 +141,20 @@ app.patch("/tasks/:id", async (req, res)=>{
   }
   catch(err){
     res.status(500).send(err)
+  }
+})
+
+app.delete("/tasks/:id", async (req, res)=>{
+  try{
+    const task = await Task.findByIdAndDelete(req.params.id)
+    if(!task){
+      console.log("Triggered ID Not found")
+      res.status(404).send("ID Not found")
+    }
+    res.status(201).send(task)
+  }
+  catch(e){
+    res.status(500).send()
   }
 })
 

@@ -33,3 +33,18 @@ app.use(express.json())
 // going to automatically parse incoming JSON to an object, if not included, while accessing req.body will throw undefined message on console.
 
 ```
+
+
+## Hashing and MiddleWare
+
+Middleware - These are the functions which are passed to customise the behaviour of our api
+
+Middleware (also called pre and post hooks) are functions which are passed control during execution of asynchronous functions. 
+
+There are two Methods accessible to us for Middleware:
+- pre: to do something before an event
+- post: to do something after an event
+
+### Pre
+
+Hook is used to perform an action before an event, Pre middleware functions are executed one after another, when each middleware calls next.

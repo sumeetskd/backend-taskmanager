@@ -51,10 +51,13 @@ router.patch("/users/:id", async (req, res) => {
   }
 
   try {
-    const userPatch = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    //middleware method to update
+    const userPatch = await User.findById(req.params.id)
+    updates.forEach((user) => userPatch[user] = req.body[user]) //here we are iterating through updates to update the values req.body -> ie. validation of properties entered by user
+
+    //this is where the middleware will get executed to save the data
+    await userPatch.save()
+
     if (!userPatch) {
       return res.status(404).send();
     }

@@ -10,7 +10,7 @@ router.post("/users", async (req, res) => {
     await user.save();
     res.send(user);
   } catch (e) {
-    res.status(500).send(e);
+    res.status(400).send(e);
   }
 });
 
@@ -19,7 +19,7 @@ router.post("/users/login", async (req, res)=>{
     const user = await User.findByCredentials(req.body.email, req.body.password);
     res.send(user)
   }catch(e){
-    res.status(404).send()
+    res.status(400).send()
   }
 })
 

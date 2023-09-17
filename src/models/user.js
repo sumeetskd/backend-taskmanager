@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
 
 //schema setup
 const userSchema = mongoose.Schema({
@@ -43,29 +43,29 @@ const userSchema = mongoose.Schema({
   },
 });
 
-userSchema.static.findByfindByCredentials = async (email, password)=>{
-  const user = await User.findone({ email })
-  if(!user){
-    throw new Error("Unable to Login")
+userSchema.statics.findByCredentials = async (email, password) => {
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new Error("Unable to Login");
   }
 
-  const isMatch = await bcrypt.compare(password, user.password)
-  if(!isMatch){
-    throw new Error("Unable to Login")
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    throw new Error("Unable to Login");
   }
-  return user
-}
+  return user;
+};
 
-userSchema.pre('save', async function(next){
-  const user = this 
-  console.log('just before saving')
+userSchema.pre("save", async function (next) {
+  const user = this;
+  console.log("just before saving");
 
-  if(user.isModified('password')){
-    user.password = await bcrypt.hash(user.password, 8)
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 8);
   }
 
-  next()
-})
+  next();
+});
 
 //separated the db models in a directory and file
 const User = mongoose.model("User", userSchema);

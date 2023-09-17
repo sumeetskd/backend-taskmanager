@@ -10,9 +10,18 @@ router.post("/users", async (req, res) => {
     await user.save();
     res.send(user);
   } catch (e) {
-    res.status(400).send(e);
+    res.status(500).send(e);
   }
 });
+
+router.post("/users/login", async (req, res)=>{
+  try{
+    const user = await User.findByCredentials(req.body.email, req.body.password);
+    res.send(user)
+  }catch(e){
+    res.status(404).send()
+  }
+})
 
 router.get("/users", async (req, res) => {
   try {
@@ -52,11 +61,11 @@ router.patch("/users/:id", async (req, res) => {
 
   try {
     //middleware method to update
-    const userPatch = await User.findById(req.params.id)
-    updates.forEach((user) => userPatch[user] = req.body[user]) //here we are iterating through updates to update the values req.body -> ie. validation of properties entered by user
+    const userPatch = await User.findById(req.params.id);
+    updates.forEach((user) => (userPatch[user] = req.body[user])); //here we are iterating through updates to update the values req.body -> ie. validation of properties entered by user
 
     //this is where the middleware will get executed to save the data
-    await userPatch.save()
+    await userPatch.save();
 
     if (!userPatch) {
       return res.status(404).send();
@@ -80,4 +89,4 @@ router.delete("/users/:id", async (req, res) => {
   }
 });
 
-module.exports = router
+module.exports = router;

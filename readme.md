@@ -48,3 +48,13 @@ There are two Methods accessible to us for Middleware:
 ### Pre
 
 Hook is used to perform an action before an event, Pre middleware functions are executed one after another, when each middleware calls next.
+
+### Middleware Notes:
+
+Without Middleware: New request -> run route handler
+
+With Middleware: New Request -> do something(perform some operations) -> run route handler
+
+To register a new middleware function we use -
+app.use() function
+
